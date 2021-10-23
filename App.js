@@ -5,13 +5,15 @@ import {
   Text,
   PermissionsAndroid,
   View,
+  ImageBackground,
 } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
+import Settings from './Settings'
+import Network from './Network'
+import sunBackground from './assets/sun_background.jpg'
  
 const App = () => {
-  const [latitude, setLatitude] = useState(null)
-  const [longitude, setLongitude] = useState(null)
-  const appID = '2075845c5f5059ae1871deb63ffea0cb'
+  const [weather, setWeather] = useState(null)
 
   useEffect(() => {
     requestLocationPermission()
@@ -34,13 +36,14 @@ const App = () => {
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         Geolocation.getCurrentPosition(
             (position) => {
-              setLatitude(position.coords.latitude)
-              setLongitude(position.coords.longitude)
-              console.log(position)
-              getWeatherData(position.coords.latitude, position.coords.longitude, appID)
+              const latitude = position.coords.latitude
+              const longitude = position.coords.longitude
+
+              Network.fetchWeatherData(latitude, longitude).then((res) => {
+                setWeather(res)
+              })
             },
             (error) => {
-              // See error code charts below.
               console.log(error.code, error.message)
             },
             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
@@ -54,16 +57,11 @@ const App = () => {
     }
   }
 
-  const getWeatherData = async (lat, lon, id) => {
-    return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${id}`)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson)
-    })
-  }
-
   return (
     <SafeAreaView style={styles.container}>
+      <View>
+
+      </View>
       <Text>Test</Text>
     </SafeAreaView>
   )
@@ -74,7 +72,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
   },
 })
  
