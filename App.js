@@ -10,7 +10,6 @@ import {
 } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
 import Network from './Network'
-import sunBackground from './assets/sun_background.jpg'
 import weather1 from './assets/weather_1.png'
 import weather2 from './assets/weather_2.png'
 import weather3 from './assets/weather_3.jpeg'

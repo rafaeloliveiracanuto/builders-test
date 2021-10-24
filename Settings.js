@@ -1,5 +1,5 @@
 const WEATHER_MAP_API = `https://api.openweathermap.org/data/2.5/weather?`
-const WEATHER_MAP_KEY = '2075845c5f5059ae1871deb63ffea0cb'
+const WEATHER_MAP_KEY = 'f69b3cd105fe2d249b4e90fe52fb4227'
 
 export default {
   WEATHER_MAP_API,
