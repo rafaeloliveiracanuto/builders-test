@@ -3,13 +3,12 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
-  PermissionsAndroid,
   View,
   TouchableOpacity,
   ImageBackground,
 } from 'react-native'
-import Geolocation from 'react-native-geolocation-service'
-import Network from './Network'
+
+import Permission from './Permission'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import IconFA5 from 'react-native-vector-icons/FontAwesome5'
 
@@ -20,48 +19,33 @@ import weather4 from './assets/weather_4.jpeg'
  
 const App = () => {
   const [weather, setWeather] = useState(null)
-  const [isUpdated, setIsUpdated] = useState(false)
+  const [image, setImage] = useState(weather1)
 
   useEffect(() => {
-    //requestLocationPermission()
+    requestLocationPermission()
   })
 
-  const requestLocationPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
-        {
-          title: 'Location Permission',
-          message:
-            'The App needs access to your location' +
-            'so you can see your weather data.',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK'
-        }
-      )
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        Geolocation.getCurrentPosition(
-            (position) => {
-              const latitude = position.coords.latitude
-              const longitude = position.coords.longitude
+  useEffect(() => {
+    changeBackground(weather?.timezone)
+  }, [weather?.timezone])
 
-              Network.fetchWeatherData(latitude, longitude).then((res) => {
-                setWeather(res)
-              })
-            },
-            (error) => {
-              console.log(error.code, error.message)
-            },
-            { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-        )
+  const changeBackground = (timezone) => {
+    if (timezone) {
+      const hour = new Date((new Date().getTime()) - weather?.timezone * 1000).getHours() - 3
+      if (hour > 5 && hour < 12) {
+        setImage(weather1)
+      } else if (hour > 12 && hour < 18) {
+        setImage(weather4)
+      } else if (hour > 18 && hour < 23) {
+        setImage(weather3)
       } else {
-        console.log('Location permission denied')
-
+        setImage(weather2)
       }
-    } catch (err) {
-      console.warn(err)
     }
+  }
+
+  const requestLocationPermission = () => {
+    Permission.requestLocation(setWeather)
   }
 
   const climate = weather?.main
@@ -71,69 +55,72 @@ const App = () => {
   const convertedMaxTemp = (climate?.temp_max - 273.15).toFixed(1)
   const wind = `${weather?.wind?.speed.toFixed(0)} m/s`
   const convertedPressure = `${(climate?.pressure / 10).toFixed(0)} kPa`
-  var d = new Date((new Date().getTime()) - (weather?.timezone * 1000))
-  console.log(d)
+  const justifyButton = weather ? 'flex-start' : 'center'
 
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.container}>
-        <ImageBackground source={weather2} style={styles.background} 
+        <ImageBackground source={image} style={styles.background} 
           imageStyle={styles.imageBackground}>
-          <Text style={styles.cityText}>{weather?.name}</Text>
-          <View style={styles.tempWrapper}>
-            <Text style={styles.tempText}>{`${convertedTemp}º`}</Text>
-          </View>
-          <View style={styles.mainContent}>
-            <View style={styles.contentGroupCircular}>
-              <View style={styles.weatherItem}>
-                <Text style={styles.weatherText}>Min. Temp.</Text>
-                <View style={styles.weatherValueWrapper}>
-                  <Text style={styles.weatherValue}>{convertedMinTemp}</Text>
-                  <Icon name='temperature-celsius' size={14} color='brown' />
-                </View>
+          { weather &&
+            <View>
+              <Text style={styles.cityText}>{weather?.name}</Text>
+              <View style={styles.tempWrapper}>
+                <Text style={styles.tempText}>{`${convertedTemp}º`}</Text>
               </View>
-              <View style={styles.weatherItem}>
-                <Text style={styles.weatherText}>Max. Temp.</Text>
-                <View style={styles.weatherValueWrapper}>
-                  <Text style={styles.weatherValue}>{convertedMaxTemp}</Text>
-                  <Icon name='temperature-celsius' size={14} color='brown' />
+              <View style={styles.mainContent}>
+                <View style={styles.contentGroupCircular}>
+                  <View style={styles.weatherItem}>
+                    <Text style={styles.weatherText}>Min. Temp.</Text>
+                    <View style={styles.weatherValueWrapper}>
+                      <Text style={styles.weatherValue}>{convertedMinTemp}</Text>
+                      <Icon name='temperature-celsius' size={14} color='brown' />
+                    </View>
+                  </View>
+                  <View style={styles.weatherItem}>
+                    <Text style={styles.weatherText}>Max. Temp.</Text>
+                    <View style={styles.weatherValueWrapper}>
+                      <Text style={styles.weatherValue}>{convertedMaxTemp}</Text>
+                      <Icon name='temperature-celsius' size={14} color='brown' />
+                    </View>
+                  </View>
+                </View>
+                <View style={styles.contentGroup}>
+                  <View style={styles.weatherItem}>
+                    <Text style={styles.weatherText}>Feels like</Text>
+                    <View style={styles.weatherValueWrapper}>
+                      <Text style={styles.weatherValue}>{convertedFeels}</Text>
+                      <Icon name='temperature-celsius' size={14} color='brown' />
+                    </View>
+                  </View>
+                  <View style={styles.weatherItem}>
+                    <Text style={styles.weatherText}>Pressure</Text>
+                    <View style={styles.weatherValueWrapper}>
+                      <Text style={styles.weatherValue}>{convertedPressure}</Text>
+                      <IconFA5 name='arrow-down' size={14} color='brown' 
+                        style={{ marginLeft: 3 }} />
+                    </View>
+                  </View>
+                  <View style={styles.weatherItem}>
+                    <Text style={styles.weatherText}>Wind</Text>
+                    <View style={styles.weatherValueWrapper}>
+                      <Text style={styles.weatherValue}>{wind}</Text>
+                      <IconFA5 name='wind' size={14} color='brown' 
+                        style={{ marginLeft: 3 }} />
+                    </View>
+                  </View>
+                  <View style={styles.weatherItem}>
+                    <Text style={styles.weatherText}>Humidity</Text>
+                    <View style={styles.weatherValueWrapper}>
+                      <Text style={styles.weatherValue}>{`${climate?.humidity}%`}</Text>
+                      <Icon name='water' size={14} color='brown' />
+                    </View>
+                  </View>
                 </View>
               </View>
             </View>
-            <View style={styles.contentGroup}>
-              <View style={styles.weatherItem}>
-                <Text style={styles.weatherText}>Feels like</Text>
-                <View style={styles.weatherValueWrapper}>
-                  <Text style={styles.weatherValue}>{convertedFeels}</Text>
-                  <Icon name='temperature-celsius' size={14} color='brown' />
-                </View>
-              </View>
-              <View style={styles.weatherItem}>
-                <Text style={styles.weatherText}>Pressure</Text>
-                <View style={styles.weatherValueWrapper}>
-                  <Text style={styles.weatherValue}>{convertedPressure}</Text>
-                  <IconFA5 name='arrow-down' size={14} color='brown' 
-                    style={{ marginLeft: 3 }} />
-                </View>
-              </View>
-              <View style={styles.weatherItem}>
-                <Text style={styles.weatherText}>Wind</Text>
-                <View style={styles.weatherValueWrapper}>
-                  <Text style={styles.weatherValue}>{wind}</Text>
-                  <IconFA5 name='wind' size={14} color='brown' 
-                    style={{ marginLeft: 3 }} />
-                </View>
-              </View>
-              <View style={styles.weatherItem}>
-                <Text style={styles.weatherText}>Humidity</Text>
-                <View style={styles.weatherValueWrapper}>
-                  <Text style={styles.weatherValue}>{`${climate?.humidity}%`}</Text>
-                  <Icon name='water' size={14} color='brown' />
-                </View>
-              </View>
-            </View>
-          </View>
-          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+          }
+          <View style={{ alignItems: 'center', justifyContent: justifyButton, height: '100%' }}>
             <TouchableOpacity style={styles.button} onPress={requestLocationPermission}>
               <Text style={styles.buttonText}>Update</Text>
             </TouchableOpacity>
