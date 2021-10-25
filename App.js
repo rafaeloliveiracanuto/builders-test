@@ -10,6 +10,9 @@ import {
 } from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
 import Network from './Network'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import IconFA5 from 'react-native-vector-icons/FontAwesome5'
+
 import weather1 from './assets/weather_1.png'
 import weather2 from './assets/weather_2.png'
 import weather3 from './assets/weather_3.jpeg'
@@ -66,16 +69,45 @@ const App = () => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.container}>
-        <View style={styles.card}>
-          <ImageBackground source={weather4} resizeMode={'cover'} style={styles.background}>
+        
+          <ImageBackground source={weather4} resizeMode={'cover'} style={styles.background} imageStyle={{ borderRadius: 10, borderBottomLeftRadius: 20, borderBottomRightRadius: 20 }}>
             <Text style={styles.cityText}>Caicó</Text>
             <View style={styles.tempWrapper}>
               <Text style={styles.tempText}>35º</Text>
             </View>
-            <View style={styles.contentGroup}>
-              <Text style={{ borderWidth: 1 }}>Oi</Text>
+            <View style={styles.mainContent}>
+              <View style={styles.contentGroup}>
+                <View style={styles.weatherItem}>
+                  <Text style={styles.weatherText}>Feels like</Text>
+                  <View style={styles.weatherValueWrapper}>
+                    <Text style={styles.weatherValue}>50</Text>
+                    <Icon name='temperature-celsius' size={14} color='brown' />
+                  </View>
+                </View>
+                <View style={styles.weatherItem}>
+                  <Text style={styles.weatherText}>Pressure</Text>
+                  <View style={styles.weatherValueWrapper}>
+                    <Text style={styles.weatherValue}>50</Text>
+                    <IconFA5 name='arrow-down' size={14} color='brown' style={{ marginLeft: 3 }} />
+                  </View>
+                </View>
+                <View style={styles.weatherItem}>
+                  <Text style={styles.weatherText}>Wind</Text>
+                  <View style={styles.weatherValueWrapper}>
+                    <Text style={styles.weatherValue}>50</Text>
+                    <IconFA5 name='wind' size={14} color='brown' style={{ marginLeft: 3 }} />
+                  </View>
+                </View>
+                <View style={styles.weatherItem}>
+                  <Text style={styles.weatherText}>Humidity</Text>
+                  <View style={styles.weatherValueWrapper}>
+                    <Text style={styles.weatherValue}>50</Text>
+                    <Icon name='water' size={14} color='brown' />
+                  </View>
+                </View>
+              </View>
             </View>
-            <View style={{ height: '95%', alignItems: 'center', justifyContent: 'flex-end' }}>
+            <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: 0 }}>
               <TouchableOpacity style={styles.button} onPress={requestLocationPermission}>
                 <Text style={styles.buttonText}>Update</Text>
               </TouchableOpacity>
@@ -90,7 +122,7 @@ const App = () => {
             <Text style={styles.text}>{climate?.pressure}</Text>
             <Text style={styles.text}>{climate?.humidity}</Text>
           </ImageBackground>
-        </View>
+        
       </View>
     </SafeAreaView>
   )
@@ -104,7 +136,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F8FF',
   },
   container: {
-    //justifyContent: 'flex-start',
+    justifyContent: 'center',
     height: '96%',
     width: '95%',
     paddingHorizontal: 0,
@@ -112,12 +144,11 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderRadius: 14,
     borderBottomWidth: 15,
-    borderBottomStartRadius: 30,
-    borderBottomEndRadius: 30,
+    borderBottomStartRadius: 35,
+    borderBottomEndRadius: 35,
     borderLeftWidth: 3,
     borderRightWidth: 3,
     borderTopWidth: 3,
-    //position: 'absolute',
     marginTop: '1%',
   },
   card: {
@@ -129,9 +160,6 @@ const styles = StyleSheet.create({
     width: 100,
     height: 50,
     backgroundColor: 'white',
-    //position: 'absolute',
-    //left: '30%',
-    //bottom: '5%',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
@@ -163,19 +191,40 @@ const styles = StyleSheet.create({
     left: '60%',
   },
   background: {
-    height: '100%', 
-    width: '100%', 
+    flex: 1,
     opacity: 0.8,
   },
   contentGroup: {
-    height: '100%',
-    width: '100%',
-    borderRadius: 20,
-    position: 'absolute',
+    borderRadius: 10,
     alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 3,
-    //bottom: 0,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    borderWidth: 1,
+    padding: 10,
+  },
+  weatherItem: {
+    flexDirection: 'column',
+  },
+  weatherText: {
+    color: 'brown', 
+    fontWeight: '700', 
+    fontSize: 16
+  },
+  weatherValueWrapper: {
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    justifyContent: 'center' 
+  },
+  weatherValue: {
+    alignSelf: 'center', 
+    color: 'brown', 
+    fontWeight: '700'
+  },
+  mainContent: {
+    justifyContent: 'center', 
+    height: '90%', 
+    width: '90%', 
+    alignSelf: 'center'
   },
 })
  
