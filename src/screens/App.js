@@ -8,14 +8,14 @@ import {
   ImageBackground,
 } from 'react-native'
 
-import Permission from './Permission'
+import Permission from '../actions/Permission'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import IconFA5 from 'react-native-vector-icons/FontAwesome5'
 
-import weather1 from './assets/weather_1.png'
-import weather2 from './assets/weather_2.png'
-import weather3 from './assets/weather_3.jpeg'
-import weather4 from './assets/weather_4.jpeg'
+import weather1 from '../assets/weather_1.png'
+import weather2 from '../assets/weather_2.png'
+import weather3 from '../assets/weather_3.jpeg'
+import weather4 from '../assets/weather_4.jpeg'
  
 const App = () => {
   const [weather, setWeather] = useState(null)
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   tempText: {
-    fontSize: 70,
+    fontSize: 65,
     color: '#F0FFF0',
     fontFamily: 'Calistoga-Regular'
   },
@@ -213,14 +213,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: '100%',
     backgroundColor: 'white',
-    opacity: 0.85,
+    opacity: 0.8,
   },
   weatherItem: {
     flexDirection: 'column',
   },
   weatherText: {
     color: 'brown', 
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Quantico-Bold'
   },
   weatherValueWrapper: {
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: '70%',
     backgroundColor: 'white',
-    opacity: 0.85,
+    opacity: 0.8,
   }
 })
  

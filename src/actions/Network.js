@@ -1,4 +1,4 @@
-import Settings from './Settings'
+import Settings from '../../Settings'
 
 const fetchWeatherData = async (lat, lon) => {
   const api = Settings.WEATHER_MAP_API
