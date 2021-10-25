@@ -23,24 +23,22 @@ const App = () => {
 
   useEffect(() => {
     requestLocationPermission()
-  })
-
-  useEffect(() => {
-    changeBackground(weather?.timezone)
-  }, [weather?.timezone])
+  }, [])
 
   const changeBackground = (timezone) => {
     if (timezone) {
       const hour = new Date((new Date().getTime()) - weather?.timezone * 1000).getHours() - 3
       if (hour > 5 && hour < 12) {
-        setImage(weather1)
+        return weather1
       } else if (hour > 12 && hour < 18) {
-        setImage(weather4)
+        return weather4
       } else if (hour > 18 && hour < 23) {
-        setImage(weather3)
+        return weather3
       } else {
-        setImage(weather2)
+        return weather2
       }
+    } else {
+      return weather1
     }
   }
 
@@ -60,7 +58,7 @@ const App = () => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.container}>
-        <ImageBackground source={image} style={styles.background} 
+        <ImageBackground source={changeBackground(weather?.timezone)} style={styles.background} 
           imageStyle={styles.imageBackground}>
           { weather &&
             <View>
