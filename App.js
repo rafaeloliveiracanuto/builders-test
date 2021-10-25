@@ -65,64 +65,80 @@ const App = () => {
   }
 
   const climate = weather?.main
+  const convertedTemp = (climate?.temp - 273.15).toFixed(1)
+  const convertedFeels = (climate?.feels_like - 273.15).toFixed(1)
+  const convertedMinTemp = (climate?.temp_min - 273.15).toFixed(1)
+  const convertedMaxTemp = (climate?.temp_max - 273.15).toFixed(1)
+  const wind = `${weather?.wind?.speed.toFixed(0)} m/s`
+  const convertedPressure = `${(climate?.pressure / 10).toFixed(0)} kPa`
+  var d = new Date((new Date().getTime()) - (weather?.timezone * 1000))
+  console.log(d)
 
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.container}>
-        
-          <ImageBackground source={weather4} resizeMode={'cover'} style={styles.background} imageStyle={{ borderRadius: 10, borderBottomLeftRadius: 20, borderBottomRightRadius: 20 }}>
-            <Text style={styles.cityText}>Caicó</Text>
-            <View style={styles.tempWrapper}>
-              <Text style={styles.tempText}>35º</Text>
-            </View>
-            <View style={styles.mainContent}>
-              <View style={styles.contentGroup}>
-                <View style={styles.weatherItem}>
-                  <Text style={styles.weatherText}>Feels like</Text>
-                  <View style={styles.weatherValueWrapper}>
-                    <Text style={styles.weatherValue}>50</Text>
-                    <Icon name='temperature-celsius' size={14} color='brown' />
-                  </View>
+        <ImageBackground source={weather2} style={styles.background} 
+          imageStyle={styles.imageBackground}>
+          <Text style={styles.cityText}>{weather?.name}</Text>
+          <View style={styles.tempWrapper}>
+            <Text style={styles.tempText}>{`${convertedTemp}º`}</Text>
+          </View>
+          <View style={styles.mainContent}>
+            <View style={styles.contentGroupCircular}>
+              <View style={styles.weatherItem}>
+                <Text style={styles.weatherText}>Min. Temp.</Text>
+                <View style={styles.weatherValueWrapper}>
+                  <Text style={styles.weatherValue}>{convertedMinTemp}</Text>
+                  <Icon name='temperature-celsius' size={14} color='brown' />
                 </View>
-                <View style={styles.weatherItem}>
-                  <Text style={styles.weatherText}>Pressure</Text>
-                  <View style={styles.weatherValueWrapper}>
-                    <Text style={styles.weatherValue}>50</Text>
-                    <IconFA5 name='arrow-down' size={14} color='brown' style={{ marginLeft: 3 }} />
-                  </View>
-                </View>
-                <View style={styles.weatherItem}>
-                  <Text style={styles.weatherText}>Wind</Text>
-                  <View style={styles.weatherValueWrapper}>
-                    <Text style={styles.weatherValue}>50</Text>
-                    <IconFA5 name='wind' size={14} color='brown' style={{ marginLeft: 3 }} />
-                  </View>
-                </View>
-                <View style={styles.weatherItem}>
-                  <Text style={styles.weatherText}>Humidity</Text>
-                  <View style={styles.weatherValueWrapper}>
-                    <Text style={styles.weatherValue}>50</Text>
-                    <Icon name='water' size={14} color='brown' />
-                  </View>
+              </View>
+              <View style={styles.weatherItem}>
+                <Text style={styles.weatherText}>Max. Temp.</Text>
+                <View style={styles.weatherValueWrapper}>
+                  <Text style={styles.weatherValue}>{convertedMaxTemp}</Text>
+                  <Icon name='temperature-celsius' size={14} color='brown' />
                 </View>
               </View>
             </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: 0 }}>
-              <TouchableOpacity style={styles.button} onPress={requestLocationPermission}>
-                <Text style={styles.buttonText}>Update</Text>
-              </TouchableOpacity>
+            <View style={styles.contentGroup}>
+              <View style={styles.weatherItem}>
+                <Text style={styles.weatherText}>Feels like</Text>
+                <View style={styles.weatherValueWrapper}>
+                  <Text style={styles.weatherValue}>{convertedFeels}</Text>
+                  <Icon name='temperature-celsius' size={14} color='brown' />
+                </View>
+              </View>
+              <View style={styles.weatherItem}>
+                <Text style={styles.weatherText}>Pressure</Text>
+                <View style={styles.weatherValueWrapper}>
+                  <Text style={styles.weatherValue}>{convertedPressure}</Text>
+                  <IconFA5 name='arrow-down' size={14} color='brown' 
+                    style={{ marginLeft: 3 }} />
+                </View>
+              </View>
+              <View style={styles.weatherItem}>
+                <Text style={styles.weatherText}>Wind</Text>
+                <View style={styles.weatherValueWrapper}>
+                  <Text style={styles.weatherValue}>{wind}</Text>
+                  <IconFA5 name='wind' size={14} color='brown' 
+                    style={{ marginLeft: 3 }} />
+                </View>
+              </View>
+              <View style={styles.weatherItem}>
+                <Text style={styles.weatherText}>Humidity</Text>
+                <View style={styles.weatherValueWrapper}>
+                  <Text style={styles.weatherValue}>{`${climate?.humidity}%`}</Text>
+                  <Icon name='water' size={14} color='brown' />
+                </View>
+              </View>
             </View>
-            
-            <Text style={styles.text}>{weather?.name}</Text>
-            <Text style={styles.text}>{climate?.temp}</Text>
-            <Text style={styles.text}>{climate?.feels_like}</Text>
-            <Text style={styles.text}>{climate?.temp}</Text>
-            <Text style={styles.text}>{climate?.temp_min}</Text>
-            <Text style={styles.text}>{climate?.temp_max}</Text>
-            <Text style={styles.text}>{climate?.pressure}</Text>
-            <Text style={styles.text}>{climate?.humidity}</Text>
-          </ImageBackground>
-        
+          </View>
+          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <TouchableOpacity style={styles.button} onPress={requestLocationPermission}>
+              <Text style={styles.buttonText}>Update</Text>
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
       </View>
     </SafeAreaView>
   )
@@ -144,12 +160,17 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderRadius: 14,
     borderBottomWidth: 15,
-    borderBottomStartRadius: 35,
-    borderBottomEndRadius: 35,
+    borderBottomStartRadius: 50,
+    borderBottomEndRadius: 50,
     borderLeftWidth: 3,
     borderRightWidth: 3,
     borderTopWidth: 3,
     marginTop: '1%',
+  },
+  imageBackground: {
+    borderRadius: 10, 
+    borderBottomLeftRadius: 36, 
+    borderBottomRightRadius: 36
   },
   card: {
     flex: 1,
@@ -165,30 +186,30 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   buttonText: {
-    color: 'black',
+    color: 'brown',
+    fontFamily: 'Quantico-Bold'
   },
   text: {
-    color: 'black',
+    color: 'brown',
     marginBottom: 20,
   },
   tempText: {
     fontSize: 70,
-    color: '#00008B',
-    fontWeight: 'bold',
-    fontFamily: 'Arial',
+    color: '#F0FFF0',
+    fontFamily: 'Calistoga-Regular'
   },
   cityText: {
     position: 'absolute',
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
-    marginTop: '15%',
+    fontSize: 28,
+    fontFamily: 'IrishGrover-Regular',
+    color: '#F0FFF0',
+    marginTop: '12%',
     marginLeft: '5%',
   },
   tempWrapper: {
-    position: 'absolute', 
-    marginTop: '5%',
-    left: '60%',
+    position: 'absolute',
+    flexDirection: 'row', 
+    left: '47%',
   },
   background: {
     flex: 1,
@@ -199,16 +220,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    borderWidth: 1,
+    borderWidth: 1.5,
+    borderColor: 'brown',
     padding: 10,
+    marginBottom: 10,
+    width: '100%',
+    backgroundColor: 'white',
+    opacity: 0.85,
   },
   weatherItem: {
     flexDirection: 'column',
   },
   weatherText: {
     color: 'brown', 
-    fontWeight: '700', 
-    fontSize: 16
+    fontSize: 16,
+    fontFamily: 'Quantico-Bold'
   },
   weatherValueWrapper: {
     flexDirection: 'row', 
@@ -218,14 +244,28 @@ const styles = StyleSheet.create({
   weatherValue: {
     alignSelf: 'center', 
     color: 'brown', 
-    fontWeight: '700'
+    fontFamily: 'Quantico-Regular'
   },
   mainContent: {
+    alignItems: 'center',
     justifyContent: 'center', 
     height: '90%', 
-    width: '90%', 
+    width: '95%', 
     alignSelf: 'center'
   },
+  contentGroupCircular: {
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    borderWidth: 1.5,
+    borderColor: 'brown',
+    padding: 10,
+    marginBottom: 10,
+    width: '70%',
+    backgroundColor: 'white',
+    opacity: 0.85,
+  }
 })
  
 export default App

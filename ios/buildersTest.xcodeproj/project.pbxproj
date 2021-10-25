@@ -28,6 +28,12 @@
 		ED8182F3D6E245E0BF930E90 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E189A6ADE4877998D6BB2 /* Octicons.ttf */; };
 		EC91D8AB987249A3BD4BDD78 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6728574C9AB94C02A0AD4AF6 /* SimpleLineIcons.ttf */; };
 		2AC8A1DB0ACA42CD8E85EAA3 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A08FEFF1129441E4BF8C4504 /* Zocial.ttf */; };
+		C01CDECC61A84B318579793A /* IrishGrover-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CDD2E00F2EB14BF9AC32C8DC /* IrishGrover-Regular.ttf */; };
+		A1C9E0562F9F469D8E5A1F15 /* Quantico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22B34B19BB7B43548ACF990F /* Quantico-Regular.ttf */; };
+		9B862B8094474F37ADB17DBE /* IrishGrover-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0348B1595B34B2990479CC6 /* IrishGrover-Regular.ttf */; };
+		EC9067CBA4E04DD792A2F675 /* Quantico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 216818D42B60449BA450B7D8 /* Quantico-Regular.ttf */; };
+		58456C9E3CE5415283E39F6C /* Quantico-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 634D8F3D9985478EA51464C7 /* Quantico-Bold.ttf */; };
+		BCF54081D4024A8EA6432E10 /* Calistoga-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CFB0A456E9649B4BF400A94 /* Calistoga-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +74,12 @@
 		3C9E189A6ADE4877998D6BB2 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		6728574C9AB94C02A0AD4AF6 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		A08FEFF1129441E4BF8C4504 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CDD2E00F2EB14BF9AC32C8DC /* IrishGrover-Regular.ttf */ = {isa = PBXFileReference; name = "IrishGrover-Regular.ttf"; path = "../assets/fonts/IrishGrover-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		22B34B19BB7B43548ACF990F /* Quantico-Regular.ttf */ = {isa = PBXFileReference; name = "Quantico-Regular.ttf"; path = "../assets/fonts/Quantico-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E0348B1595B34B2990479CC6 /* IrishGrover-Regular.ttf */ = {isa = PBXFileReference; name = "IrishGrover-Regular.ttf"; path = "../src/assets/fonts/IrishGrover-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		216818D42B60449BA450B7D8 /* Quantico-Regular.ttf */ = {isa = PBXFileReference; name = "Quantico-Regular.ttf"; path = "../src/assets/fonts/Quantico-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		634D8F3D9985478EA51464C7 /* Quantico-Bold.ttf */ = {isa = PBXFileReference; name = "Quantico-Bold.ttf"; path = "../src/assets/fonts/Quantico-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4CFB0A456E9649B4BF400A94 /* Calistoga-Regular.ttf */ = {isa = PBXFileReference; name = "Calistoga-Regular.ttf"; path = "../src/assets/fonts/Calistoga-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +188,12 @@
 				3C9E189A6ADE4877998D6BB2 /* Octicons.ttf */,
 				6728574C9AB94C02A0AD4AF6 /* SimpleLineIcons.ttf */,
 				A08FEFF1129441E4BF8C4504 /* Zocial.ttf */,
+				CDD2E00F2EB14BF9AC32C8DC /* IrishGrover-Regular.ttf */,
+				22B34B19BB7B43548ACF990F /* Quantico-Regular.ttf */,
+				E0348B1595B34B2990479CC6 /* IrishGrover-Regular.ttf */,
+				216818D42B60449BA450B7D8 /* Quantico-Regular.ttf */,
+				634D8F3D9985478EA51464C7 /* Quantico-Bold.ttf */,
+				4CFB0A456E9649B4BF400A94 /* Calistoga-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -287,6 +305,12 @@
 				ED8182F3D6E245E0BF930E90 /* Octicons.ttf in Resources */,
 				EC91D8AB987249A3BD4BDD78 /* SimpleLineIcons.ttf in Resources */,
 				2AC8A1DB0ACA42CD8E85EAA3 /* Zocial.ttf in Resources */,
+				C01CDECC61A84B318579793A /* IrishGrover-Regular.ttf in Resources */,
+				A1C9E0562F9F469D8E5A1F15 /* Quantico-Regular.ttf in Resources */,
+				9B862B8094474F37ADB17DBE /* IrishGrover-Regular.ttf in Resources */,
+				EC9067CBA4E04DD792A2F675 /* Quantico-Regular.ttf in Resources */,
+				58456C9E3CE5415283E39F6C /* Quantico-Bold.ttf in Resources */,
+				BCF54081D4024A8EA6432E10 /* Calistoga-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
