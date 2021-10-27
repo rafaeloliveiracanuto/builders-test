@@ -1,9 +1,9 @@
 # Weather App
-This project is an app that displays weather data from the region based on the user's location
+<p>This project is an app that displays weather data from the region based on the user's location.</p>
 <p align="center">
-  <img src="/src/assets/screenshot.jpeg"  width="350" height="700">
-  <img src="/src/assets/screenshot_2.jpeg"  width="350" height="700">
-  <img src="/src/assets/screenshot_3.jpeg"  width="350" height="700">
+  <img src="/src/assets/screenshot_2.jpeg"  width="300" height="650">
+  <img src="/src/assets/screenshot.jpeg"  width="300" height="650">
+  <img src="/src/assets/screenshot_3.jpeg"  width="300" height="650">
 </p>
 <h1>Features</h1>
 
